@@ -164,12 +164,12 @@ void Device::createLogicalDevice() {
 
   // might not really be necessary anymore because device specific validation layers
   // have been deprecated
-  if (enableValidationLayers) {
-    createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-    createInfo.ppEnabledLayerNames = validationLayers.data();
-  } else {
-    createInfo.enabledLayerCount = 0;
-  }
+  //if (enableValidationLayers) {
+    //createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+    //createInfo.ppEnabledLayerNames = validationLayers.data();
+  //} else {
+  createInfo.enabledLayerCount = 0;
+  //}
 
   if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS) {
     throw std::runtime_error("failed to create logical device!");
