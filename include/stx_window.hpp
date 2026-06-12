@@ -1,5 +1,6 @@
 #ifndef STX_WINDOW_H
 #define STX_WINDOW_H
+#include <string>
 #include <memory>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
