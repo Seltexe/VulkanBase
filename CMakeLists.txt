@@ -30,3 +30,26 @@ target_link_libraries(VulkanApp PRIVATE
         glfw
         glm::glm
 )
+
+# --- Shader compilation ---
+find_program(GLSLC glslc REQUIRED)
+
+file(GLOB_RECURSE GLSL_SOURCE_FILES
+        "${CMAKE_SOURCE_DIR}/resources/shaders/*.vert"
+        "${CMAKE_SOURCE_DIR}/resources/shaders/*.frag"
+        "${CMAKE_SOURCE_DIR}/resources/shaders/*.comp"
+)
+
+foreach(GLSL ${GLSL_SOURCE_FILES})
+    get_filename_component(FILE_NAME ${GLSL} NAME)
+    set(SPIRV "${CMAKE_SOURCE_DIR}/resources/shaders/${FILE_NAME}.spv")
+    add_custom_command(
+            OUTPUT ${SPIRV}
+            COMMAND ${GLSLC} ${GLSL} -o ${SPIRV}
+            DEPENDS ${GLSL}
+    )
+    list(APPEND SPIRV_BINARY_FILES ${SPIRV})
+endforeach()
+
+add_custom_target(Shaders DEPENDS ${SPIRV_BINARY_FILES})
+add_dependencies(VulkanApp Shaders)
