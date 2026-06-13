@@ -26,12 +26,22 @@ namespace stx
         }
     }
 
+    void Window::framebufferResizeCallback(GLFWwindow *window, int width, int height)
+    {
+        auto stxWindow = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+        stxWindow->framebufferResized = true;
+        stxWindow->width = width;
+        stxWindow->height = height;
+    }
+
     void Window::initWindow()
     {
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
         window = glfwCreateWindow(this->width, this->height, title.c_str(), nullptr, nullptr);
+        glfwSetWindowUserPointer(window, this);
+        glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
     }
 }
