@@ -25,6 +25,14 @@
             }
         },
         {
+            "name": "clang-release",
+            "inherits": "clang",
+            "binaryDir": "${sourceDir}/build/clang-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
             "name": "clang-debug",
             "inherits": "clang",
             "binaryDir": "${sourceDir}/build/clang-debug",

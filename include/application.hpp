@@ -4,6 +4,7 @@
 #include "stx_pipeline.hpp"
 #include "stx_swap_chain.hpp"
 #include "stx_window.hpp"
+#include "stx_model.hpp"
 
 // std
 #include <memory>
@@ -25,10 +26,13 @@ namespace stx
 
         void run();
     private:
+        void loadModels();
         void createPipelineLayout();
         void createPipeline();
         void createCommandBuffers();
         void drawFrame();
+
+        void sierpinski(std::vector<Model::Vertex> &vertices, int depth, glm::vec2 left, glm::vec2 right, glm::vec2 top);
 
         Window window{WIDTH, HEIGHT, "HELLO VULKAN"};
         Device device{window};
@@ -36,6 +40,7 @@ namespace stx
         std::unique_ptr<Pipeline> pipeline;
         VkPipelineLayout pipelineLayout;
         std::vector<VkCommandBuffer> commandBuffers;
+        std::unique_ptr<Model> model;
 
     };
 }

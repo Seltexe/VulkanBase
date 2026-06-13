@@ -9,7 +9,6 @@ namespace stx
         this->width = w;
         this->height = h;
         this->title = title;
-
         initWindow();
     }
 
